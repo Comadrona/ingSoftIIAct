@@ -6,7 +6,7 @@ if(navigator.userAgent.match(/Android|webOS|iPhone|iWindos Phone/i)){
     keyused=[];
     level=0;
     bandera=0;
-    frase="simulacion de datos";
+    frase="simulaciondedatos";
     $(document).ready(function(){
         $("input").keyup(function(){
             key=$("input").val().toLowerCase();
@@ -18,7 +18,11 @@ if(navigator.userAgent.match(/Android|webOS|iPhone|iWindos Phone/i)){
                 if(frase.includes(key)){
                     array=agregarLetra(key);
                     bandera+=array.length;
-                    if(bandera===19)alert("Ganaste :3")
+                    console.log(array);
+                    if(bandera===17){
+                        alert("Ganaste :3")
+                        $("#cuadro").prop("disabled", true)
+                    }
                     keyused.push(key)
                 }else{
                     level++;
@@ -33,6 +37,7 @@ if(navigator.userAgent.match(/Android|webOS|iPhone|iWindos Phone/i)){
 function changeImage(level){
     if(level>8){
         alert("YA NO HAY MAS VIDAS")
+        $("#cuadro").prop("disabled", true)
     }else{
         $("#imagen").attr("src","imagenes/parte"+level+".png");
     }
@@ -40,21 +45,19 @@ function changeImage(level){
 }
 
 function agregarLetra(letra){
-    if(letra===' ')letra="space";
     mapa = {
-        s:[0,18],
+        s:[0,16],
         i:[1,7],
         m:[2],
         u:[3],
         l:[4],
-        a:[5,15],
+        a:[5,13],
         c:[6],
-        o:[8,17],
+        o:[8,15],
         n:[9],
-        space:[10,13],
-        d:[11,14],
-        e:[12],
-        t:[16]
+        d:[10,12],
+        e:[11],
+        t:[14]
     }
     for(elemento of mapa[letra]){
         if(letra==="space")$("#letter"+elemento).html("&nbsp;");
